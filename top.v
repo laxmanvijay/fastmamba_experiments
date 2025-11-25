@@ -75,25 +75,18 @@ module top_wrapper (
         if (rst) begin
             P_store <= 0;
             results_valid <= 0;
+            read_index <= 0;
         end else if (compute_start) begin
             P_store <= P_bus;     // Capture all 240 results at once
             results_valid <= 1;
-            read_index <= 0;
-        end
-    end
-    
-    //------------------------------------------------------
-    // READOUT LOGIC (Serial output: 1 lane per cycle)
-    //------------------------------------------------------
-    always @(posedge clk) begin
-        if (rst) begin
-            read_index <= 0;
+            read_index <= 0;      // Reset read pointer
         end else if (read_en && results_valid) begin
             if (read_index < NUM_LANES - 1) begin
                 read_index <= read_index + 1;
             end
         end
     end
+
     
     //------------------------------------------------------
     // OUTPUT ASSIGNMENT
