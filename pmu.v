@@ -40,9 +40,9 @@ module pmu #(
         end else begin
             for (j = 0; j < NUM_LANES; j = j + 1) begin
                 P_flat[(j+1)*OUT_W-1 -: OUT_W] <= lane_mul[j];
-                A_reg <= A_flat;
-                B_reg <= B_flat;
             end
+            A_reg <= A_flat;
+            B_reg <= B_flat;
         end
     end
 
